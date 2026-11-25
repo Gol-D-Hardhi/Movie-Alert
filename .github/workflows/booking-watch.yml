@@ -6,7 +6,16 @@ on:
   #   # runs during high load (worst at the top of the hour), so the odd minutes
   #   # get served more reliably. Runs are still best-effort, not guaranteed.
   #   - cron: "4,14,24,34,44,54 * * * *"
-  workflow_dispatch: {}   # lets you trigger a manual run from the Actions tab
+  workflow_dispatch:
+    inputs:
+      config_file:
+        description: "Config JSON filename"
+        required: false
+        default: "config.json"
+      state_file:
+        description: "State JSON filename"
+        required: false
+        default: "state.json"   # lets you trigger a manual run from the Actions tab
 
 # Allow the workflow to commit the updated state file back to the repo.
 permissions:
@@ -31,6 +40,8 @@ jobs:
 
       - name: Run poller
         env:
+          CONFIG_PATH: ${{ github.event.inputs.config_file || 'config.json' }}
+          STATE_PATH: ${{ github.event.inputs.state_file || 'state.json' }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           # Route through an India egress so BookMyShow doesn't 403 the
