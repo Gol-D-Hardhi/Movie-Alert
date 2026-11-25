@@ -1,0 +1,9 @@
+{
+  "detector": "venue_date",
+  "movie": "Avengers: Doomsday",
+  "requested_date": "20261217",
+  "venue_codes": ["AMBH", "PRHN"],
+  "venue_label": "AMB Cinemas: Gachibowli & Prasads Multiplex: Hyderabad",
+  "url_template": "https://in.bookmyshow.com/movies/hyderabad/avengers-doomsday/buytickets/ET00526306/{date}",
+  "min_references": 10
+}
